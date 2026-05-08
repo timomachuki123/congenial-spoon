@@ -1,12 +1,13 @@
-const mongoose = require('mongoose');
-const Department = require('./models/Department');
-const Faculty = require('./models/Faculty');
-const Course = require('./models/Course');
-const Student = require('./models/Student');
-const Announcement = require('./models/Announcement');
-const Event = require('./models/Event');
-const Admission = require('./models/Admission');
-const Contact = require('./models/Contact');
+import process from "node:process";
+import mongoose from "mongoose";
+import Department from "./models/Department.js";
+import Faculty from "./models/Faculty.js";
+import Course from "./models/Course.js";
+import Student from "./models/Student.js";
+import Announcement from "./models/Announcement.js";
+import Event from "./models/Event.js";
+import Admission from "./models/Admission.js";
+import Contact from "./models/Contact.js";
 
 mongoose.connect('mongodb://localhost:27017/college', {
   useNewUrlParser: true,
@@ -31,25 +32,25 @@ db.once('open', async () => {
     console.log('Cleared existing data');
     
     const departments = await Department.insertMany([
-      { name: 'Computer Science', code: 'CS', description: 'Department of Computer Science and Engineering', establishedYear: 1990, location: 'Building A, Floor 3', phone: '+254705096085', email: 'stfrancistechnicalasumbi2@gmail.com', website: 'https://stfrancistechnical.ac.ke' },
-      { name: 'Mathematics', code: 'MATH', description: 'Department of Mathematics and Statistics', establishedYear: 1985, location: 'Building B, Floor 2', phone: '+254705096085', email: 'stfrancistechnicalasumbi2@gmail.com', website: 'https://stfrancistechnical.ac.ke' },
-      { name: 'Physics', code: 'PHY', description: 'Department of Physics and Astronomy', establishedYear: 1988, location: 'Building C, Floor 1', phone: '+254705096085', email: 'stfrancistechnicalasumbi2@gmail.com', website: 'https://stfrancistechnical.ac.ke' },
-      { name: 'Business Administration', code: 'BUS', description: 'School of Business Administration', establishedYear: 1995, location: 'Building D, Floor 4', phone: '+254705096085', email: 'stfrancistechnicalasumbi2@gmail.com', website: 'https://stfrancistechnical.ac.ke' },
-      { name: 'English', code: 'ENG', description: 'Department of English and Literature', establishedYear: 1980, location: 'Building E, Floor 2', phone: '+254705096085', email: 'stfrancistechnicalasumbi2@gmail.com', website: 'https://stfrancistechnical.ac.ke' },
-      { name: 'Institute of Management', code: 'MGT', description: 'Institute of Management providing leadership and organizational management education', establishedYear: 2000, location: 'Building F, Floor 1', phone: '+254705096085', email: 'stfrancistechnicalasumbi2@gmail.com', website: 'https://stfrancistechnical.ac.ke' },
-      { name: 'Business Management', code: 'BMGT', description: 'Department of Business Management', establishedYear: 2002, location: 'Building F, Floor 2', phone: '+254705096085', email: 'stfrancistechnicalasumbi2@gmail.com', website: 'https://stfrancistechnical.ac.ke' },
-      { name: 'Human Resource Management', code: 'HRM', description: 'Department of Human Resource Management', establishedYear: 2005, location: 'Building F, Floor 3', phone: '+254705096085', email: 'stfrancistechnicalasumbi2@gmail.com', website: 'https://stfrancistechnical.ac.ke' },
-      { name: 'Liberal Studies', code: 'LIBS', description: 'Department of Liberal Studies', establishedYear: 1998, location: 'Building G, Floor 1', phone: '+254705096085', email: 'stfrancistechnicalasumbi2@gmail.com', website: 'https://stfrancistechnical.ac.ke' },
-      { name: 'Engineering', code: 'ENGR', description: 'Department of Engineering', establishedYear: 1992, location: 'Building H, Floor 1', phone: '+254705096085', email: 'stfrancistechnicalasumbi2@gmail.com', website: 'https://stfrancistechnical.ac.ke' }
+      { name: 'Computer Science', code: 'CS', description: 'Department of Computer Science and Engineering', establishedYear: 1990, location: 'Building A, Floor 3', phone: '+254705096085', email: 'stfrancistechnical@ac.ke' },
+      { name: 'Mathematics', code: 'MATH', description: 'Department of Mathematics and Statistics', establishedYear: 1985, location: 'Building B, Floor 2', phone: '+254705096085', email: 'stfrancistechnical@ac.ke' },
+      { name: 'Physics', code: 'PHY', description: 'Department of Physics and Astronomy', establishedYear: 1988, location: 'Building C, Floor 1', phone: '+254705096085', email: 'stfrancistechnical@ac.ke' },
+      { name: 'Business Administration', code: 'BUS', description: 'School of Business Administration', establishedYear: 1995, location: 'Building D, Floor 4', phone: '+254705096085', email: 'stfrancistechnical@ac.ke' },
+      { name: 'English', code: 'ENG', description: 'Department of English and Literature', establishedYear: 1980, location: 'Building E, Floor 2', phone: '+254705096085', email: 'stfrancistechnical@ac.ke' },
+      { name: 'Institute of Management', code: 'MGT', description: 'Institute of Management providing leadership and organizational management education', establishedYear: 2000, location: 'Building F, Floor 1', phone: '+254705096085', email: 'stfrancistechnical@ac.ke' },
+      { name: 'Business Management', code: 'BMGT', description: 'Department of Business Management', establishedYear: 2002, location: 'Building F, Floor 2', phone: '+254705096085', email: 'stfrancistechnical@ac.ke' },
+      { name: 'Human Resource Management', code: 'HRM', description: 'Department of Human Resource Management', establishedYear: 2005, location: 'Building F, Floor 3', phone: '+254705096085', email: 'stfrancistechnical@ac.ke' },
+      { name: 'Liberal Studies', code: 'LIBS', description: 'Department of Liberal Studies', establishedYear: 1998, location: 'Building G, Floor 1', phone: '+254705096085', email: 'stfrancistechnical@ac.ke' },
+      { name: 'Engineering', code: 'ENGR', description: 'Department of Engineering', establishedYear: 1992, location: 'Building H, Floor 1', phone: '+254705096085', email: 'stfrancistechnical@ac.ke' },
     ]);
     console.log('Created 10 departments');
     
     const faculty = await Faculty.insertMany([
-      { employeeId: 'FAC001', firstName: 'John', lastName: 'Smith', email: 'john.smith@stfrancistechnical.ac.ke', phone: '+254705096085', gender: 'Male', department: departments[0]._id, position: 'Professor', specialization: 'Artificial Intelligence', qualifications: [{ degree: 'Ph.D.', field: 'Computer Science', institution: 'MIT', year: 2005 }], officeHours: 'Mon/Wed 2:00 PM - 4:00 PM', officeLocation: 'Building A, Room 301', bio: 'Dr. John Smith is a leading researcher in AI.', researchInterests: ['Machine Learning', 'NLP'] },
-      { employeeId: 'FAC002', firstName: 'Sarah', lastName: 'Johnson', email: 'sarah.johnson@stfrancistechnical.ac.ke', phone: '+254705096085', gender: 'Female', department: departments[0]._id, position: 'Associate Professor', specialization: 'Software Engineering', qualifications: [{ degree: 'Ph.D.', field: 'Software Engineering', institution: 'Stanford', year: 2010 }], officeHours: 'Tue/Thu 10:00 AM - 12:00 PM', officeLocation: 'Building A, Room 302', bio: 'Dr. Sarah Johnson specializes in software architecture.', researchInterests: ['Software Architecture', 'DevOps'] },
-      { employeeId: 'FAC003', firstName: 'Michael', lastName: 'Brown', email: 'michael.brown@stfrancistechnical.ac.ke', phone: '+254705096085', gender: 'Male', department: departments[1]._id, position: 'Professor', specialization: 'Applied Mathematics', qualifications: [{ degree: 'Ph.D.', field: 'Mathematics', institution: 'Harvard', year: 2003 }], officeHours: 'Mon/Wed 1:00 PM - 3:00 PM', officeLocation: 'Building B, Room 201', bio: 'Expert in applied mathematics.', researchInterests: ['Mathematical Modeling'] },
-      { employeeId: 'FAC004', firstName: 'Emily', lastName: 'Davis', email: 'emily.davis@stfrancistechnical.ac.ke', phone: '+254705096085', gender: 'Female', department: departments[2]._id, position: 'Assistant Professor', specialization: 'Quantum Physics', qualifications: [{ degree: 'Ph.D.', field: 'Physics', institution: 'Caltech', year: 2015 }], officeHours: 'Tue/Thu 3:00 PM - 5:00 PM', officeLocation: 'Building C, Room 101', bio: 'Research in quantum mechanics.', researchInterests: ['Quantum Computing'] },
-      { employeeId: 'FAC005', firstName: 'Robert', lastName: 'Wilson', email: 'robert.wilson@stfrancistechnical.ac.ke', phone: '+254705096085', gender: 'Male', department: departments[3]._id, position: 'Professor', specialization: 'Finance', qualifications: [{ degree: 'Ph.D.', field: 'Finance', institution: 'Wharton', year: 2008 }], officeHours: 'Mon/Wed 9:00 AM - 11:00 AM', officeLocation: 'Building D, Room 401', bio: 'Expert in corporate finance.', researchInterests: ['Corporate Finance'] }
+      { employeeId: 'FAC001', firstName: 'John', lastName: 'Smith', email: 'john.smith@stfrancistechnical.ac.ke', phone: '+254705096085', gender: 'Male', department: departments[0]._id, position: 'Professor' },
+      { employeeId: 'FAC002', firstName: 'Sarah', lastName: 'Johnson', email: 'sarah.johnson@stfrancistechnical.ac.ke', phone: '+254705096085', gender: 'Female', department: departments[0]._id, position: 'Associate Professor' },
+      { employeeId: 'FAC003', firstName: 'Michael', lastName: 'Brown', email: 'michael.brown@stfrancistechnical.ac.ke', phone: '+254705096085', gender: 'Male', department: departments[1]._id, position: 'Lecturer' },
+      { employeeId: 'FAC004', firstName: 'Emily', lastName: 'Davis', email: 'emily.davis@stfrancistechnical.ac.ke', phone: '+254705096085', gender: 'Female', department: departments[2]._id, position: 'Assistant Lecturer' },
+      { employeeId: 'FAC005', firstName: 'Robert', lastName: 'Wilson', email: 'robert.wilson@stfrancistechnical.ac.ke', phone: '+254705096085', gender: 'Male', department: departments[3]._id, position: 'Professor' },
     ]);
     console.log('Created 5 faculty');
     
@@ -227,29 +228,29 @@ db.once('open', async () => {
     
     // Announcements
     await Announcement.insertMany([
-      { title: 'Fall Semester Registration Now Open', content: 'Registration for Fall 2026 is now open.', category: 'Academic', priority: 'High', author: faculty[0]._id, targetAudience: 'All', startDate: new Date('2026-03-01'), endDate: new Date('2026-04-30') },
-      { title: 'Campus Career Fair', content: 'Join us for the annual career fair on May 20th.', category: 'Events', priority: 'Medium', author: faculty[4]._id, targetAudience: 'Students', startDate: new Date('2026-05-01'), endDate: new Date('2026-05-20') },
-      { title: 'Library Hours Extended', content: 'Library open 24/7 during finals week.', category: 'General', priority: 'Low', author: faculty[2]._id, targetAudience: 'All', startDate: new Date('2026-04-01'), endDate: new Date('2026-04-30') }
+      { title: 'Fall Semester Registration Now Open', content: 'Registration for Fall 2026 is now open.', category: 'Academic', priority: 'High', author: faculty[0]._id, targetAudience: 'All', startDate: new Date('2026-05-01'), endDate: new Date('2026-05-15') },
+      { title: 'Campus Career Fair', content: 'Join us for the annual career fair on May 20th.', category: 'Events', priority: 'Medium', author: faculty[4]._id, targetAudience: 'Students', startDate: new Date('2026-05-20'), endDate: new Date('2026-05-20') },
+      { title: 'Library Hours Extended', content: 'Library open 24/7 during finals week.', category: 'General', priority: 'Low', author: faculty[2]._id, targetAudience: 'All', startDate: new Date('2026-05-25'), endDate: new Date('2026-06-01') },
     ]);
     console.log('Created announcements');
     
     // Events
     await Event.insertMany([
-      { title: 'Welcome Week', description: 'Welcome new students.', category: 'Social', startDate: new Date('2026-05-04'), endDate: new Date('2026-05-08'), startTime: '9:00 AM', endTime: '5:00 PM', location: 'Main Campus', organizer: faculty[0]._id, targetAudience: 'Students', maxParticipants: 500, isRegistrationRequired: false },
-      { title: 'AI Research Symposium', description: 'Annual AI symposium.', category: 'Academic', startDate: new Date('2026-05-20'), endDate: new Date('2026-05-20'), startTime: '9:00 AM', endTime: '6:00 PM', location: 'Building A, Auditorium', organizer: faculty[0]._id, department: departments[0]._id, targetAudience: 'All', maxParticipants: 200, isRegistrationRequired: true, registrationDeadline: new Date('2026-05-15') }
+      { title: 'Welcome Week', description: 'Welcome new students.', category: 'Social', startDate: new Date('2026-05-04'), endDate: new Date('2026-05-08'), startTime: '9:00 AM', endTime: '5:00 PM', location: 'Main Campus' },
+      { title: 'AI Research Symposium', description: 'Annual AI symposium.', category: 'Academic', startDate: new Date('2026-05-20'), endDate: new Date('2026-05-20'), startTime: '9:00 AM', endTime: '5:00 PM', location: 'Conference Hall' },
     ]);
     console.log('Created events');
     
     // Admissions
     await Admission.insertMany([
-      { applicationId: 'ADM001', firstName: 'James', lastName: 'Miller', email: 'james.miller@email.com', phone: '+254705096085', gender: 'Male', program: 'Computer Science', department: departments[0]._id, level: 'Level 3', semester: 'January', year: 2026, status: 'Accepted' },
-      { applicationId: 'ADM002', firstName: 'Jennifer', lastName: 'Lee', email: 'jennifer.lee@email.com', phone: '+254705096085', gender: 'Female', program: 'Mathematics', department: departments[1]._id, level: 'Level 4', semester: 'January', year: 2026, status: 'Pending' }
+      { applicationId: 'ADM001', firstName: 'James', lastName: 'Miller', email: 'james.miller@email.com', phone: '+254705096085', gender: 'Male', program: 'Computer Science', department: departments[0]._id, status: 'Pending' },
+      { applicationId: 'ADM002', firstName: 'Jennifer', lastName: 'Lee', email: 'jennifer.lee@email.com', phone: '+254705096085', gender: 'Female', program: 'Mathematics', department: departments[1]._id, status: 'Pending' },
     ]);
     console.log('Created admissions');
     
     // Contacts
     await Contact.insertMany([
-      { name: 'Thomas Anderson', email: 'thomas.anderson@email.com', phone: '+254705096085', subject: 'Admission Inquiry', message: 'Information about Computer Science program.', department: departments[0]._id, category: 'Admissions', status: 'New' }
+      { name: 'Thomas Anderson', email: 'thomas.anderson@email.com', phone: '+254705096085', subject: 'Admission Inquiry', message: 'Information about Computer Science program.', department: departments[0]._id, status: 'New' },
     ]);
     console.log('Created contacts');
     
