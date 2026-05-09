@@ -1,0 +1,28 @@
+---
+deployment:
+  branch: main
+  preproduction:
+    - npm install
+  production:
+    - npm install
+
+scripts:
+  preBuild: []
+  build: []
+  postBuild: []
+  preDeploy: []
+  deploy: []
+  postDeploy: []
+
+environment:
+  NODE_ENV: production
+  PORT: 3000
+  MONGODB_URI: ${MONGODB_URI}
+  JWT_SECRET: ${JWT_SECRET}
+  EMAIL_HOST: ${EMAIL_HOST}
+  EMAIL_PORT: ${EMAIL_PORT}
+  EMAIL_USER: ${EMAIL_USER}
+  EMAIL_PASS: ${EMAIL_PASS}
+
+static:
+  - "/public"
